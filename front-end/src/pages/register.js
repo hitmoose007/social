@@ -58,7 +58,7 @@ export default function Register() {
             onChange={handleChange}
             value={formData.password}
           />
-          <input className="submit" type="submit" value="Login" onClick={handleSubmit}/>
+          <input className="submit" type="submit" value="Register" onClick={handleSubmit}/>
         </form>
       </div>
     </div>
