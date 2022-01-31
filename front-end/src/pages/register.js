@@ -1,13 +1,12 @@
 import React from "react";
 import Header from "../components/header";
 import { FaUserCircle } from "react-icons/fa";
-import { FaCashRegister } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
+    name:"",
   });
   console.log(JSON.stringify(formData));
   function handleChange(event) {
@@ -21,7 +20,7 @@ export default function Login() {
   }
   function handleSubmit(event){
       event.preventDefault()
-      let res = fetch("http://restapi.adequateshop.com/api/authaccount/login", {
+      let res = fetch("http://localhost:5000/users/createUser", {
         method: "POST",
         body: JSON.stringify(formData),
       })
@@ -33,17 +32,16 @@ export default function Login() {
   return (
     <div className="container">
       <Header />
-      <div className="reg">
-        <Link to="/register">
-        <p>Register</p>
-              <FaCashRegister />
-          </Link>
-        </div>
+
       <div className="form">
-        <h1>
-          <FaUserCircle />
-        </h1>
         <form>
+        <input
+            type="text"
+            placeholder="Username"
+            name="name"
+            onChange={handleChange}
+            value={formData.name}
+          />
           <input
             type="email"
             placeholder="Email"
@@ -62,7 +60,6 @@ export default function Login() {
           />
           <input className="submit" type="submit" value="Login" onClick={handleSubmit}/>
         </form>
-
       </div>
     </div>
   );

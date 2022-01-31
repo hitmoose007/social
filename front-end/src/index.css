@@ -69,5 +69,26 @@ code {
   background-color: rgb(199, 202, 207);
   color:black;
   cursor: pointer;}
+  .reg{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width:100px;
+    background-color: transparent;
+    border-radius: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 550px;
+    box-shadow: 0px 10px 14px rgba(0, 0, 0, 0.1);
+
+  }
+  .reg p{
+    font-size: 15px;
+}
+  .reg:hover{
+    background-color: rgb(86, 88, 92);
+    cursor: pointer;
+  }
+
 
 

@@ -41,6 +41,7 @@ async function createUser(req, res) {
   } catch (error) {
     handleServerError(req, res, error);
   }
+  console.log(res);
 }
 
 module.exports = router;
