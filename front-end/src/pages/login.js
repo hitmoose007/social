@@ -19,14 +19,15 @@ export default function Login() {
   }
   function handleSubmit(event){
       event.preventDefault()
-      let res = fetch("http://localhost:5000/users/", {
+      let res = fetch("http://restapi.adequateshop.com/api/authaccount/login", {
         method: "POST",
-        body: JSON.stringify({
-          email: formData.email,
-          password:formData.password,
-        }),
+        body: formData,
       })
-  }
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        }
+        );}
   return (
     <div className="container">
       <Header />
