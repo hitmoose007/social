@@ -3,11 +3,11 @@ const router = express.Router({ mergeParams: true });
 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-
+const { comparePassword, hashPassword } = require("../../utils/hash");
 const { userRegisterationValidator } = require("../../validation/index");
 
 router.get("/", getAllUsers);
-router.post("/", createUser);
+router.post("/", registerUser);
 
 async function getAllUsers(req, res) {
   try {
@@ -20,26 +20,29 @@ async function getAllUsers(req, res) {
   }
 }
 
-async function createUser(req, res) {
+async function registerUser(req, res) {
   try {
-    //validation data using joi
-    const { error } = userRegisterationValidator(req.body);
+    const { value, error } = userRegisterationValidator(req.body);
     if (error) {
-      return res.status(400).json({
-        error: error.details,
+      res.status(400).json({
+        error: error.message,
       });
     }
 
+    const hashedPassword = await hashPassword(value.password);
     const user = await prisma.user.create({
       data: {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
+        email: value.email,
+        password: hashedPassword,
       },
     });
-    res.json(user);
+    res.json({
+      user,
+    });
   } catch (error) {
-    handleServerError(req, res, error);
+    res.json({
+      error: error.message,
+    });
   }
 }
 

@@ -1,5 +1,5 @@
 //bcrypt js
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 async function hashPassword(password) {
     const salt = await bcrypt.genSalt(8);
@@ -12,7 +12,7 @@ async function comparePassword(password, hashedPassword) {
     return isMatch;
 }
 
-router.exports = {
+module.exports = {
     hashPassword,
     comparePassword
 }
