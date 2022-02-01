@@ -14,6 +14,9 @@ const prisma = new PrismaClient();
             email: decoded.email,
         },
         });
+        if(!user){
+            return res.status(401).json({ error: "Unauthorized" });
+        }
     } catch (error) {
         return res.status(400).json({ error: "Invalid token" });
     }
