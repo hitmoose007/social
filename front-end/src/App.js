@@ -1,15 +1,19 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import Dashboard from "./pages/dashboard";
+import React from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const [isAuth, setIsAuth] = React.useState(true);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" exact element={<Login />} />
-        <Route path="/register" exact element={<Register />} />
-      </Routes>
-    </BrowserRouter>
+    <Router>
+        <Route path="/" exact component={Login} />
+        <Route path="/register" exact component={Register} />
+        <ProtectedRoute path="/dashboard" exact component={Dashboard} isAuth={isAuth}/>
+   </Router>
   );
 }
 
