@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
- async function isLoggedIn(req, res, next) {
+ async function isLoggedIn(req, res, next)  {
     const header = req.headers["authorization"];
     if (!header) return res.status(401).json({ error: "Unauthorized" });
     
