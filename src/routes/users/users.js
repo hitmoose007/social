@@ -8,8 +8,8 @@ const { userRegisterationValidator } = require("../../validation/index");
 
 const { isLoggedIn } = require("../../middleware/auth");
 
-router.get("/", isLoggedIn, getAllUsers);
-router.post("/", registerUser);
+router.get("/getusers", isLoggedIn, getAllUsers);
+router.post("/register", registerUser);
 
 async function getAllUsers(req, res) {
   try {

@@ -20,7 +20,7 @@ export default function Register() {
   }
   function handleSubmit(event){
       event.preventDefault()
-      let res = fetch("http://localhost:5000/users/createUser", {
+      let res = fetch("http://localhost:5000/users/register", {
         method: "POST",
         body: JSON.stringify(formData),
       })

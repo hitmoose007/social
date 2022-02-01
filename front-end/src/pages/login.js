@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { FaCashRegister } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Login({setToken}) {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
@@ -21,15 +21,16 @@ export default function Login() {
   }
   function handleSubmit(event){
       event.preventDefault()
-      let res = fetch("http://restapi.adequateshop.com/api/authaccount/login", {
+      let res = fetch(" http://localhost:5000/auth/login", {
         method: "POST",
         body: JSON.stringify(formData),
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          setToken(data.token);
         }
-        );}
+        );
+      }
   return (
     <div className="container">
       <Header />
@@ -67,3 +68,4 @@ export default function Login() {
     </div>
   );
 }
+
