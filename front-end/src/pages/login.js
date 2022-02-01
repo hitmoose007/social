@@ -35,7 +35,7 @@ export default function Login() {
       <Header />
       <div className="reg">
         <Link to="/register">
-        <p>Register</p>
+        <a>Register</a>
               <FaCashRegister />
           </Link>
         </div>
