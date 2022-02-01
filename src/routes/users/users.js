@@ -6,7 +6,9 @@ const prisma = new PrismaClient();
 const { comparePassword, hashPassword } = require("../../utils/hash");
 const { userRegisterationValidator } = require("../../validation/index");
 
-router.get("/", getAllUsers);
+const { isLoggedIn } = require("../../middleware/auth");
+
+router.get("/", isLoggedIn, getAllUsers);
 router.post("/", registerUser);
 
 async function getAllUsers(req, res) {
