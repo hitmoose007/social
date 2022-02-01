@@ -46,6 +46,7 @@ async function registerUser(req, res) {
       error: error.message,
     });
   }
+  console.log(res);
 }
 
 module.exports = router;
