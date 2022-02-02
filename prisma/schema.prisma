@@ -17,15 +17,18 @@ model User {
     name     String?
 
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt @default(now())
+    updatedAt DateTime @default(now()) @updatedAt
 
     posts        Post[]
     comments     PostComment[]
     likes        PostLike[]
     dislike      PostDislike[]
-    userInFriend Friend[]  @relation("User") //nameing this wierdly as i had no idea what to name it
-    friend       Friend[]  @relation("Friend")
-    sharedPost   PostShare[] 
+    userInFriend Friend[]      @relation("User") //nameing this wierdly as i had no idea what to name it
+    friend       Friend[]      @relation("Friend")
+    sharedPost   PostShare[]
+
+    commentLike    CommentLike[]
+    commentDislike CommentDislike[]
 
 
 
@@ -34,17 +37,17 @@ model User {
 
 //model for friends
 model Friend {
-    
+
     //make relation with User
     author    User     @relation("User", fields: [userId], references: [id])
-    userId  String
+    userId    String
     //make relation with User
     friend    User     @relation("Friend", fields: [friendId], references: [id])
     friendId  String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@id([userId, friendId]) 
+    @@id([userId, friendId])
 }
 
 //model for posts
@@ -61,28 +64,32 @@ model Post {
     comments PostComment[]
     likes    PostLike[]
     dislike  PostDislike[]
-    share  PostShare[]
+    share    PostShare[]
 
 }
 
 model PostComment {
-    
-    content  String
-    post     Post   @relation(fields: [postId], references: [id])
-    postId   String
+
+    id      String @id @default(cuid())
+    content String
+    post    Post   @relation(fields: [postId], references: [id])
+    postId  String
     //relation with user
-    author   User   @relation(fields: [userId], references: [id])
-    userId String
+    author  User   @relation(fields: [userId], references: [id])
+    userId  String
+
+    likes    CommentLike[]
+    dislikes CommentDislike[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@id([postId, userId])
+
 
 }
 
 model PostLike {
-    
+
     post   Post   @relation(fields: [postId], references: [id])
     postId String
     //relation with user
@@ -92,12 +99,12 @@ model PostLike {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@id([postId, userId])
 
+    @@id([postId, userId])
 }
 
 model PostDislike {
-    
+
     post   Post   @relation(fields: [postId], references: [id])
     postId String
     //relation with user
@@ -111,7 +118,7 @@ model PostDislike {
 }
 
 model PostShare {
-    
+
     post   Post   @relation(fields: [postId], references: [id])
     postId String
     //relation with user
@@ -123,4 +130,31 @@ model PostShare {
 
     @@id([postId, userId])
 }
-//model for chatting app
+
+model CommentLike {
+
+    comment   PostComment @relation(fields: [commentId], references: [id])
+    commentId String
+    //relation with user
+    user      User        @relation(fields: [userId], references: [id])
+    userId    String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@id([commentId, userId])
+}
+
+model CommentDislike {
+
+    comment   PostComment @relation(fields: [commentId], references: [id])
+    commentId String
+    //relation with user
+    user      User        @relation(fields: [userId], references: [id])
+    userId    String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@id([commentId, userId])
+}
