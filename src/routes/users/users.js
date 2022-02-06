@@ -26,7 +26,8 @@ async function registerUser(req, res) {
   try {
     const { value, error } = userRegisterationValidator(req.body);
     if (error) {
-      res.status(400).json({
+      console.log(req.body)
+      return res.status(400).json({
         error: error.message,
       });
     }
