@@ -22,7 +22,11 @@ export default function Register() {
     event.preventDefault();
 
     axios.post("http://localhost:5000/api/users/register", formData)
-      .then((res) => console.log(res))
+      .then((res) => {console.log(res)
+      if(res.status===200)
+        window.location.href = "/";
+      else(alert("Email already exists/invalid email or username"))
+      })
       .catch((data) => {
         console.log(data);
       });
