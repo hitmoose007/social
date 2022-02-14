@@ -25,7 +25,7 @@ const getCurrentUser=()=> {
 
 const authServiceFront = {
   loginFront,
-  logout: logoutFront,
+  logoutFront,
   getCurrentUser,}
 
   export default authServiceFront;

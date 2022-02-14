@@ -3,6 +3,7 @@ import Header from "../components/header";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCashRegister } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 import authServiceFront from "../services/authServiceFront";
 
 export default function Login({setToken}) {
@@ -22,12 +23,13 @@ export default function Login({setToken}) {
       };
     });
   }
+  const history=useHistory()
   async function handleSubmit(event){
       event.preventDefault()
       try{
         await authServiceFront.loginFront(formData.email,formData.password).then(
           ()=>{
-            window.history.push("/dashboard")
+            history.push("/dashboard")
             window.location.reload()
           },
           (error)=>{
