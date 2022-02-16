@@ -30,6 +30,8 @@ async function isLoggedIn(req, res, next) {
   try {
     const token = header.split(" ")[1]; // Bearer <token>
     const decoded = jwt.verify(token, "privateKey");
+    console.log(decoded.email);
+
     const user = await prisma.user.findFirst({
       where: {
         email: decoded.email,
@@ -39,11 +41,10 @@ async function isLoggedIn(req, res, next) {
       return res.status(401).json({ error: "Unauthorized" });
     }
     req.user = user;
-  next();
-  }catch (error) {
+    next();
+  } catch (error) {
     return res.status(400).json({ error: "Invalid token" });
   }
-  
 }
 
 module.exports = { isLoggedIn, isAdmin };

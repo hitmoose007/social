@@ -7,6 +7,7 @@ const { comparePassword, hashPassword } = require("../../utils/hash");
 const {
   userRegisterationValidator,
   userUpdateValidator,
+  userDeleteValidator,
 } = require("../../validation/index");
 
 const { isLoggedIn, isAdmin } = require("../../middleware/auth");
@@ -14,6 +15,7 @@ const { isLoggedIn, isAdmin } = require("../../middleware/auth");
 router.get("/", isLoggedIn, getAllUsers);
 router.post("/", registerUser);
 router.put("/:id", isLoggedIn, updateUser);
+router.delete("/:id", isLoggedIn, deleteUser);
 
 async function getAllUsers(req, res) {
   try {
@@ -30,7 +32,7 @@ async function registerUser(req, res) {
   try {
     const { value, error } = userRegisterationValidator(req.body);
     if (error) {
-      console.log(req.body)
+      console.log(req.body);
       return res.status(400).json({
         error: error.message,
       });
@@ -99,8 +101,6 @@ async function updateUser(req, res) {
       });
     }
 
-    
-
     if (value.password) {
       const hashedPassword = await hashPassword(value.password);
       const updatedUser = await prisma.user.update({
@@ -130,6 +130,48 @@ async function updateUser(req, res) {
         updatedUser,
       });
     }
+  } catch (error) {
+    res.json({
+      error: error.message,
+    });
+  }
+}
+
+async function deleteUser(req, res) {
+  //check users id is same as password
+  const user = await prisma.user.findFirst({
+    where: {
+      id: req.params.id,
+    },
+  });
+
+  const {value, error} = userDeleteValidator(req.body);
+  const hashedPassword = await hashPassword(value.password);
+
+  //user.password is encrypted password
+  if (!comparePassword(user.password, hashedPassword)) {
+    return res.status(400).json({
+      error: "Incorrect password",
+    });
+  }
+  //compare passwords
+  const isMatch = await comparePassword(req.body.password, hashedPassword);
+  if (!isMatch) {
+    return res.status(400).json({
+      error: "Passwords do not match",
+    });
+  }
+
+
+  try {
+    const deletedUser = await prisma.user.delete({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.json({
+      deletedUser,
+    });
   } catch (error) {
     res.json({
       error: error.message,

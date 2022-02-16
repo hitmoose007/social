@@ -12,8 +12,12 @@ const userUpdateSchema = joi.object({
     newPassword: joi.string(),
 }).or('newEmail', 'newPassword');
 
+const userDeleteSchema = joi.object({
+    Password: joi.string().required(),
+});
 
 module.exports = {
     userRegisterationSchema,
     userUpdateSchema,
+    userDeleteSchema
 };
