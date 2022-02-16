@@ -1,9 +1,19 @@
 const joi = require('joi');
 
 const userRegisterationSchema = joi.object({
-    name: joi.string().required(),
+  
     email: joi.string().email().required(),
     password: joi.string().required(),
 });
 
-module.exports = userRegisterationSchema;
+const userUpdateSchema = joi.object({
+    previousPassword: joi.string().required(),
+    newEmail: joi.string().email(),
+    newPassword: joi.string(),
+}).or('newEmail', 'newPassword');
+
+
+module.exports = {
+    userRegisterationSchema,
+    userUpdateSchema,
+};

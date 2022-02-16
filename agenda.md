@@ -1,0 +1,1 @@
+- [] Logs user out of session after updating his details fix this

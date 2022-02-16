@@ -12,9 +12,13 @@ datasource db {
 
 model User {
     id       String  @id @default(cuid())
-    email    String
+    email    String 
     password String
+
+    isAdmin  Boolean @default(false)
     name     String?
+
+    relationshipStatus String?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now()) @updatedAt
