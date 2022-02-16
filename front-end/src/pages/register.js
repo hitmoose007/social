@@ -1,14 +1,13 @@
 import React from "react";
 import Header from "../components/header";
-import { FaUserCircle } from "react-icons/fa";
+import axios from "axios";
 
 export default function Register() {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
-    name:"",
+    name: "",
   });
-  console.log(JSON.stringify(formData));
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevFormData) => {
@@ -18,24 +17,27 @@ export default function Register() {
       };
     });
   }
-  function handleSubmit(event){
-      event.preventDefault()
-      let res = fetch("http://localhost:5000/users/register", {
-        method: "POST",
-        body: JSON.stringify(formData),
+  
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    axios.post("http://localhost:5000/api/users/register", formData)
+      .then((res) => {console.log(res)
+      if(res.status===200)
+        window.location.href = "/";
+      else(alert("Email already exists/invalid email or username"))
       })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        }
-        );}
+      .catch((data) => {
+        console.log(data);
+      });
+  }
   return (
     <div className="container">
       <Header />
 
       <div className="form">
         <form>
-        <input
+          <input
             type="text"
             placeholder="Username"
             name="name"
@@ -58,7 +60,12 @@ export default function Register() {
             onChange={handleChange}
             value={formData.password}
           />
-          <input className="submit" type="submit" value="Register" onClick={handleSubmit}/>
+          <input
+            className="submit"
+            type="submit"
+            value="Register"
+            onClick={handleSubmit}
+          />
         </form>
       </div>
     </div>

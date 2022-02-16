@@ -3,12 +3,16 @@ import Header from "../components/header";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCashRegister } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
+import authServiceFront from "../services/authServiceFront";
 
 export default function Login({setToken}) {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
+
+
   console.log(JSON.stringify(formData));
   function handleChange(event) {
     const { name, value } = event.target;
@@ -19,18 +23,23 @@ export default function Login({setToken}) {
       };
     });
   }
-  function handleSubmit(event){
+  const history=useHistory()
+  async function handleSubmit(event){
       event.preventDefault()
-      let res = fetch(" http://localhost:5000/auth/login", {
-        method: "POST",
-        body: JSON.stringify(formData),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setToken(data.token);
-        }
-        );
+      try{
+        await authServiceFront.loginFront(formData.email,formData.password).then(
+          ()=>{
+            history.push("/dashboard")
+            window.location.reload()
+          },
+          (error)=>{
+            console.log(error)
+          }
+        )
+      } catch(err){
+        console.log(err)
       }
+    }
   return (
     <div className="container">
       <Header />
