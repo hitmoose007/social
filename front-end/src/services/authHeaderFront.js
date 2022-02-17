@@ -1,11 +1,7 @@
-export default function authHeaderFront() {
-  // return authorization header with jwt token
-  const user = JSON.parse(localStorage.getItem("user"));
-
+export default function authHeader() {
+  const user = JSON.parse(localStorage.getItem('user'));
   if (user && user.token) {
-    return {
-      "x-auth-token": user.token,
-    };
+    return { authorization: 'Bearer ' + user.token };
   } else {
     return {};
   }

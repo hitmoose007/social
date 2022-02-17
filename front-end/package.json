@@ -11,6 +11,8 @@
     "crypto": "^1.0.1",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "net": "^1.0.2",
     "path": "^0.12.7",
     "querystring": "^0.2.1",

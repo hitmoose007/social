@@ -3,8 +3,9 @@ import Header from "../components/header";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCashRegister } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
-import authServiceFront from "../services/authServiceFront";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
+
 
 export default function Login({setToken}) {
   const [formData, setFormData] = React.useState({
@@ -23,23 +24,18 @@ export default function Login({setToken}) {
       };
     });
   }
-  const history=useHistory()
   async function handleSubmit(event){
       event.preventDefault()
-      try{
-        await authServiceFront.loginFront(formData.email,formData.password).then(
-          ()=>{
-            history.push("/dashboard")
-            window.location.reload()
-          },
-          (error)=>{
-            console.log(error)
+      axios.post("http://localhost:5000/api/auth/login", {
+        email: formData.email,
+        password: formData.password,
+      }).then(response=>{
+          if (response.data.token) {
+            localStorage.setItem('user',JSON.stringify(response.data))
           }
-        )
-      } catch(err){
-        console.log(err)
-      }
+      })
     }
+    
   return (
     <div className="container">
       <Header />

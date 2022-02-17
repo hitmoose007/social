@@ -26,6 +26,7 @@ async function getAllUsers(req, res) {
   }
 }
 
+
 async function registerUser(req, res) {
   try {
     const { value, error } = userRegisterationValidator(req.body);

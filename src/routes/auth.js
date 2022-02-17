@@ -27,7 +27,7 @@ async function login(req, res) {
   
   if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-  jwt.sign({ email: value.email ,}, "privateKey", {
+  jwt.sign({ email: value.email}, "privateKey", {
       expiresIn: "2h",
   },function (err, token) {
     //print out error if there is one
@@ -35,6 +35,7 @@ async function login(req, res) {
       console.log(err);
     }
     //return the token
+    console.log(token)
     res.json({
       token,
     });
