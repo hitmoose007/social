@@ -33,7 +33,7 @@ export default function Register() {
   }
   return (
     <div className="container">
-      <Header />
+      <Header show={false} />
 
       <div className="form">
         <form>

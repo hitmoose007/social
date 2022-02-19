@@ -1,6 +1,14 @@
-import axios from "axios";
-const API_URL = "http://localhost:5000/api/";
 
-export default getCurrentUser = () => {
+const getCurrentUser=()=> {
     return JSON.parse(localStorage.getItem("user"));
   };
+
+const Logout=()=>{
+    localStorage.removeItem("user");
+    window.location.reload();
+}
+
+export default {
+  getCurrentUser,
+  Logout,
+}

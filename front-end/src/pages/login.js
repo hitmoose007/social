@@ -7,7 +7,8 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 
-export default function Login({setToken}) {
+export default function Login() {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
@@ -32,13 +33,14 @@ export default function Login({setToken}) {
       }).then(response=>{
           if (response.data.token) {
             localStorage.setItem('user',JSON.stringify(response.data))
+            setIsLoggedIn(true)
           }
       })
     }
     
   return (
     <div className="container">
-      <Header />
+      <Header show={isLoggedIn} />
       <div className="reg">
         <Link to="/register">
         <a>Register</a>
