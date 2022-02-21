@@ -8,6 +8,7 @@ import Dashboard from "./pages/dashboard";
 import React from "react";
 import jwtDecode from "jwt-decode";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LoginRoute from "./components/LoginRoute";
 import Header from "./components/header";
 import Chats from "./pages/chats";
 
@@ -29,8 +30,8 @@ function App() {
   return (
     <Router>
       <Header show={isValidSession} />
-      <Route path="/" exact component={Login} />
-      <Route path="/register" exact component={Register} />
+      <LoginRoute path="/" exact component={Login} isAuth={isValidSession} />
+      <LoginRoute path="/register" exact component={Register} isAuth={isValidSession} />
       <ProtectedRoute
         path="/dashboard"
         exact

@@ -15,7 +15,7 @@ code {
 
 .header{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: rgb(86, 88, 92);
   left:0;
   top:0;
@@ -27,6 +27,10 @@ code {
   font-size: 30px;
   font-weight: bold;
   margin-left: 10px;
+}
+.logo:hover{
+  color:rgb(218, 213, 213);
+  cursor: pointer;
 }
 .form{
   flex-direction: column;
@@ -106,12 +110,20 @@ code {
   background-color: rgb(250, 250, 250);
   color: rgb(86, 88, 92);
   font-weight:800;
+  height: 80%;
+  width:70px;
+  margin: 5px;
 }
 .lgOutbtn:hover{
   background-color: rgb(111, 113, 116);
   color:rgb(218, 213, 213);
   cursor: pointer;
 }
+.links{
+  margin-left: auto;
+
+}
+
 
 
 

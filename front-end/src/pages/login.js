@@ -33,8 +33,7 @@ export default function Login() {
       if (data.token) {
         localStorage.setItem('user',JSON.stringify(data))
       }
-      window.location.href = "http://localhost:3000/dashboard";
-        
+        window.location.reload()
       }
     
   return (
