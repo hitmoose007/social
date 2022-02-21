@@ -1,21 +1,19 @@
 import React from "react";
-import Header from "../components/header";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCashRegister } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import { useHistory } from "react-router";
 
 
 export default function Login() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const history = useHistory()
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
 
 
-  console.log(JSON.stringify(formData));
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevFormData) => {
@@ -26,21 +24,20 @@ export default function Login() {
     });
   }
   async function handleSubmit(event){
-      event.preventDefault()
-      axios.post("http://localhost:5000/api/auth/login", {
-        email: formData.email,
-        password: formData.password,
-      }).then(response=>{
-          if (response.data.token) {
-            localStorage.setItem('user',JSON.stringify(response.data))
-            setIsLoggedIn(true)
-          }
-      })
-    }
+    event.preventDefault()
+    axios.post("http://localhost:5000/api/auth/login", {
+      email: formData.email,
+      password: formData.password,
+    }).then(response=>{
+      if (response.data.token) {
+        localStorage.setItem('user',JSON.stringify(response.data))
+      }
+      history.push('/dashboard')
+        })
+      }
     
   return (
     <div className="container">
-      <Header show={isLoggedIn} />
       <div className="reg">
         <Link to="/register">
         <a>Register</a>

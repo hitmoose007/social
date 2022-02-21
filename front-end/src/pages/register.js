@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../components/header";
 import axios from "axios";
 
 export default function Register() {
@@ -33,7 +32,6 @@ export default function Register() {
   }
   return (
     <div className="container">
-      <Header show={false} />
 
       <div className="form">
         <form>
