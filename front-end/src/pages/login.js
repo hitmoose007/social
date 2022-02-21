@@ -25,15 +25,16 @@ export default function Login() {
   }
   async function handleSubmit(event){
     event.preventDefault()
-    axios.post("http://localhost:5000/api/auth/login", {
+    const { data } = await axios.post("http://localhost:5000/api/auth/login", {
       email: formData.email,
       password: formData.password,
-    }).then(response=>{
-      if (response.data.token) {
-        localStorage.setItem('user',JSON.stringify(response.data))
+    })
+
+      if (data.token) {
+        localStorage.setItem('user',JSON.stringify(data))
       }
-      history.push('/dashboard')
-        })
+      window.location.href = "http://localhost:3000/dashboard";
+        
       }
     
   return (

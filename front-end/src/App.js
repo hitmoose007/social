@@ -20,7 +20,7 @@ function App() {
     if (user) {
       const expTime = new Date(user.exp * 1000);
       const currTime = new Date();
-      if (expTime < currTime) {
+      if (expTime <= currTime) {
         localStorage.removeItem("user");
       } else isValidSession = true;
     }
