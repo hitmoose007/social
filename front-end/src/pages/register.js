@@ -5,7 +5,6 @@ export default function Register() {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
-    name: "",
   });
   function handleChange(event) {
     const { name, value } = event.target;
@@ -35,13 +34,13 @@ export default function Register() {
 
       <div className="form">
         <form>
-          <input
+          {/* <input
             type="text"
             placeholder="Username"
             name="name"
             onChange={handleChange}
             value={formData.name}
-          />
+          /> */}
           <input
             type="email"
             placeholder="Email"
