@@ -1,12 +1,10 @@
 import React from "react";
-import Header from "../components/header";
 import axios from "axios";
 
 export default function Register() {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
-    name: "",
   });
   function handleChange(event) {
     const { name, value } = event.target;
@@ -21,7 +19,7 @@ export default function Register() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    axios.post("http://localhost:5000/api/users/register", formData)
+    axios.post("http://localhost:5000/api/users/", formData)
       .then((res) => {console.log(res)
       if(res.status===200)
         window.location.href = "/";
@@ -33,17 +31,16 @@ export default function Register() {
   }
   return (
     <div className="container">
-      <Header />
 
       <div className="form">
         <form>
-          <input
+          {/* <input
             type="text"
             placeholder="Username"
             name="name"
             onChange={handleChange}
             value={formData.name}
-          />
+          /> */}
           <input
             type="email"
             placeholder="Email"

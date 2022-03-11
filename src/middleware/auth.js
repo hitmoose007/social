@@ -24,6 +24,7 @@ async function isAdmin(req, res, next) {
 }
 
 async function isLoggedIn(req, res, next) {
+  console.log(req.headers);
   const header = req.headers["authorization"];
   if (!header) return res.status(401).json({ error: "Unauthorized" });
 
@@ -41,8 +42,12 @@ async function isLoggedIn(req, res, next) {
       return res.status(401).json({ error: "Unauthorized" });
     }
     req.user = user;
+
     next();
-  } catch (error) {
+  } 
+  catch (error) {
+    console.log(error)
+
     return res.status(400).json({ error: "Invalid token" });
   }
 }

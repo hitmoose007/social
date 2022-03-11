@@ -1,24 +1,50 @@
-import { BrowserRouter as Router, Routes, Route,Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+} from "react-router-dom";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Dashboard from "./pages/dashboard";
 import React from "react";
+import jwtDecode from "jwt-decode";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LoginRoute from "./components/LoginRoute";
+import Header from "./components/header";
 import Chats from "./pages/chats";
-import authHeaderFront from "./services/authHeaderFront";
-
-
 
 function App() {
+  let isValidSession = false;
+  const token = localStorage.getItem("user");
 
-  console.log(authHeaderFront()["x-auth-token"]===JSON.parse(localStorage.getItem("user")).token)
+  if (token) {
+    const user = jwtDecode(token);
+    if (user) {
+      const expTime = new Date(user.exp * 1000);
+      const currTime = new Date();
+      if (expTime <= currTime) {
+        localStorage.removeItem("user");
+      } else isValidSession = true;
+    }
+  }
+
   return (
     <Router>
-        <Route path="/" exact component={Login} />
-        <Route path="/register" exact component={Register} />
-        <ProtectedRoute path="/dashboard" exact component={Dashboard} isAuth={authHeaderFront()["x-auth-token"]===JSON.parse(localStorage.getItem("user")).token}/>
-        <ProtectedRoute path="/chats" exact component={Chats} isAuth={authHeaderFront()["x-auth-token"]===JSON.parse(localStorage.getItem("user")).token}/>
-   </Router>
+      <Header show={isValidSession} />
+      <LoginRoute path="/" exact component={Login} isAuth={isValidSession} />
+      <LoginRoute path="/register" exact component={Register} isAuth={isValidSession} />
+      <ProtectedRoute
+        path="/dashboard"
+        exact
+        component={Dashboard}
+        isAuth={isValidSession}
+      />
+      <ProtectedRoute
+        path="/chats"
+        exact
+        component={Chats}
+        isAuth={isValidSession}
+      />
+    </Router>
   );
 }
 
