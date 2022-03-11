@@ -37,9 +37,6 @@ model User {
     participants Participant[]
     messages     Message[]
 
-
-
-
 }
 
 //model for friends
