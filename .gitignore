@@ -130,3 +130,4 @@ dist
 #env
 .env
 prisma\.env
+prisma/.env
