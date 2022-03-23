@@ -13,7 +13,6 @@ export default function Login() {
     password: "",
   });
 
-
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevFormData) => {
