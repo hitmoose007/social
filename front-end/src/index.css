@@ -123,7 +123,79 @@ code {
   margin-left: auto;
 
 }
+.posts{
+  width: 20rem;
+  font-size: 15px;
+  flex: 0 0 auto;       
+  display: flex;       
+  flex-direction: column;
+  position: relative;
+  margin-top: 15%;
+}
 
+.postList{
+  display:flex;
+  gap: 20px;
+  overflow-x: auto;
+  width:60%;
+  margin-left: 20%;
+}
+.profile{
+  display: flex;
+  justify-content: center;
+  padding:10px;
+}
+.profiledetails{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+.profiledetails img{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+.profilefollowing{
+ display: flex;
+ height: 20%;
+ gap:10px;
+}
+hr{
+  background-color: black;
+  border: none;
+  height: 1px;
+  margin: 20px;
+}
+.profilefollowing button{
+  pointer-events: auto;
+	cursor: pointer;
+	background: #e7e7e7;
+	border: none;
+	padding: 1.5rem 3rem;
+	position: relative;
+	display: flex;
+  flex-direction: column;
+
+}
+@media screen and (max-width: 1000px) {
+  .profile{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+  }
+  .postList{
+    display:flex;
+    gap: 20px;
+    overflow-x: auto;
+    width:90%;
+    margin-left: 5%;
+  }
+
+}
+  
 
 
 
