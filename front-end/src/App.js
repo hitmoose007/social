@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Router>
-      <Header show={isValidSession} />
+     {isValidSession && <Header show={isValidSession} />}
       <LoginRoute path="/" exact component={Login} isAuth={isValidSession} />
       <LoginRoute path="/register" exact component={Register} isAuth={isValidSession} />
       <ProtectedRoute

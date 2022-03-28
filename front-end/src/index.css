@@ -32,21 +32,31 @@ code {
   color:rgb(218, 213, 213);
   cursor: pointer;
 }
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(131,127,127);
+  background: radial-gradient(circle, rgba(131,127,127,1) 0%, rgba(2,0,36,1) 58%);
+}
 .form{
   flex-direction: column;
   flex-wrap: wrap;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
-  height: 400px;
-  position: absolute;
-  left: 20%;
-  top: 25%;
-  background-color: rgb(86, 88, 92);
-  box-shadow: 5px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
+  width: 500px;
+  height: 90%;
+  background: rgb(37, 37, 59);
   text-align: center;
+  transition: all 0.5s ease;
+  opacity: 0.7;
+}
+.form:hover{
+  opacity: 1;
 }
 .form h1{
   font-size: 100px;
@@ -70,6 +80,7 @@ code {
 .submit{
  background-color: black;
  color: aliceblue;
+ transition: all 0.5s ease;
 }
 .submit:hover{
   background-color: rgb(199, 202, 207);
@@ -82,13 +93,11 @@ code {
     width:80px;
     height: 80px;
     flex-wrap: wrap;
-    background-color: rgb(86, 88, 92);
+    background-color: rgba(2,0,36,1);
     border-radius: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 550px;
     box-shadow: 0px 10px 14px rgba(0, 0, 0, 0.1);
-
+    margin-top: 10px;
+    transition: all 0.5s ease;
   }
   .reg a{
     font-size: 15px;
@@ -100,7 +109,7 @@ code {
   color: rgb(0, 0, 0);
 }
 .reg:hover{
-  background-color: rgb(199, 202, 207);
+  background: rgb(159, 146, 180);
   color:black;
   cursor: pointer;
 }

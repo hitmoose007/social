@@ -37,12 +37,6 @@ export default function Login() {
     
   return (
     <div className="container">
-      <div className="reg">
-        <Link to="/register">
-        <a>Register</a>
-              <FaCashRegister />
-          </Link>
-        </div>
       <div className="form">
         <h1>
           <FaUserCircle />
@@ -66,7 +60,12 @@ export default function Login() {
           />
           <input className="submit" type="submit" value="Login" onClick={handleSubmit}/>
         </form>
-
+      <div className="reg">
+        <Link to="/register">
+        <a>Register</a>
+              <FaCashRegister />
+          </Link>
+        </div>
       </div>
     </div>
   );
