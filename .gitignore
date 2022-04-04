@@ -132,3 +132,4 @@ dist
 prisma\.env
 prisma/.env
 .env
+.env

@@ -27,8 +27,8 @@ model User {
     comments     PostComment[]
     likes        PostLike[]
     dislike      PostDislike[]
-    userInFriend Friend[]      @relation("User") //nameing this wierdly as i had no idea what to name it
-    friend       Friend[]      @relation("Friend")
+    userInFriend Friend[]      @relation("User") //oye, what is this for????(Haider)
+    friend       Friend[]      @relation("Friend")//yall really need to name your variables properly. and comment shit
     sharedPost   PostShare[]
 
     commentLike    CommentLike[]
