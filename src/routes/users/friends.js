@@ -18,6 +18,7 @@ router.delete("/friend_list/remove/:id", isLoggedIn, removeFriend);
 router.get("/friend_list", isLoggedIn, getFriends);
 router.get("/friend_list", isLoggedIn, getFriends);
 
+//function for getting friends list
 async function getFriends(req, res) {
     try {
         const user = await prisma.user.findMany({
@@ -33,12 +34,14 @@ async function getFriends(req, res) {
     }
 }
 
+//function for removing a friend
 async function removeFriend(req, res) {
     const friend = await prisma.user.findFirst({
         where: {
             friendId: req.user.friend
         }
     });
+    //
     if (friend != null) {
         try {
             const deleteFriend = await prisma.delete({
@@ -54,6 +57,12 @@ async function removeFriend(req, res) {
             error:error.message
             })
         }
+    }
+    else
+    {
+        return res.status(400).json({
+            error:"No friend with that ID exists"
+        });
     }
 }
 
