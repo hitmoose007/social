@@ -22,3 +22,5 @@ async function getUser(req, res) {
     });
   }
 }
+
+module.exports=router;

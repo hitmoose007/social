@@ -13,20 +13,29 @@ const {
 } = require("../../middleware/auth");
 
 
-router.get("/friend_list", isLoggedIn, getFriends);
-router.delete("/friend_list/remove/:id", isLoggedIn, removeFriend);
-router.get("/friend_list", isLoggedIn, getFriends);
+router.get("/friend_list", isLoggedIn, getFriends); //gets friend list
+router.delete("/friend_list/remove/:friendId", isLoggedIn, removeFriend); //removes a friend id from table
+router.post("/friend_list", isLoggedIn, getFriends); //adds a person to the friends list
 router.get("/friend_list", isLoggedIn, getFriends);
 
 //function for getting friends list
 async function getFriends(req, res) {
     try {
-        const user = await prisma.user.findMany({
+        const friends = await prisma.friend.findMany({
             where: {
-                friend: req.user.friend
+                userId: req.user.id
+            },
+            include: {
+                friend: {
+                    select: {
+                        name: true
+                    }
+                }
             }
-        })
-        res.json(user);
+        });
+
+        console.log()
+        res.json(friends);
     } catch (error) {
         res.json({
             error: error.message,
@@ -36,34 +45,66 @@ async function getFriends(req, res) {
 
 //function for removing a friend
 async function removeFriend(req, res) {
-    const friend = await prisma.user.findFirst({
+    const friends = await prisma.friend.findFirst({
         where: {
-            friendId: req.user.friend
+            userId: req.user.id,
+            friendId: req.friend.friendId
         }
     });
     //
-    if (friend != null) {
+    if (friends != null) {
         try {
-            const deleteFriend = await prisma.delete({
+            const deleteFriend = await prisma.friend.delete({
                 where: {
-                    friendId: req.user.friend
+                    friendId: req.param.friendId
                 }
             });
             res.json({
                 deleteFriend,
-            })
+            });
         } catch (error) {
             res.json({
-            error:error.message
-            })
+                error: error.message
+            });
         }
-    }
-    else
-    {
+    } else {
         return res.status(400).json({
-            error:"No friend with that ID exists"
+            error: "No friend with that ID exists"
         });
     }
 }
 
-module.exports=router;
+async function addFriend(req, res) {
+    try {
+        const user = await prisma.user.findFirst({//check if the user being added exists
+            where: {
+                id:req.user.id
+            }
+        });
+    }
+    catch(error){
+        if(user==null){
+        let errorM= "Cannot find user";
+        res.json({errorM});
+        }
+        else
+        {
+            res.json({
+                error:error.message
+            })
+        }
+    }
+    const addUser = await prisma.friend.create({//thinking up a query for this. Should work as follows:
+        // Friends as Fr, Users as Us. Insert into I where userId=Us.Id
+        where: {
+            userId: req.user.id,
+        },
+        include:{
+            data:{
+                id:req.user.id
+            }
+        }
+    });
+
+}
+module.exports = router;
