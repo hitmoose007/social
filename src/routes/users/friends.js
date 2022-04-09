@@ -15,8 +15,8 @@ const {
 
 router.get("/friend_list", isLoggedIn, getFriends); //gets friend list
 router.delete("/friend_list/remove/:friendId", isLoggedIn, removeFriend); //removes a friend id from table
-router.post("/friend_list", isLoggedIn, getFriends); //adds a person to the friends list
-router.get("/friend_list", isLoggedIn, getFriends);
+router.post("/addFriend", isLoggedIn, getFriends); //adds a person to the friends list
+//add route for getting single friend details
 
 //function for getting friends list
 async function getFriends(req, res) {
@@ -33,8 +33,7 @@ async function getFriends(req, res) {
                 }
             }
         });
-
-        console.log()
+        console.log();
         res.json(friends);
     } catch (error) {
         res.json({
@@ -51,7 +50,6 @@ async function removeFriend(req, res) {
             friendId: req.friend.friendId
         }
     });
-    //
     if (friends != null) {
         try {
             const deleteFriend = await prisma.friend.delete({
@@ -84,26 +82,30 @@ async function addFriend(req, res) {
     }
     catch(error){
         if(user==null){
-        let errorM= "Cannot find user";
+        const errorM= "Cannot find user";
         res.json({errorM});
         }
         else
         {
             res.json({
                 error:error.message
-            })
+            });
         }
+        return;
     }
-    const addUser = await prisma.friend.create({//thinking up a query for this. Should work as follows:
-        // Friends as Fr, Users as Us. Insert into I where userId=Us.Id
-        where: {
-            userId: req.user.id,
+    const addUser = await prisma.friend.create({// function for adding friend
+        data:{
+            userId:req.user.id,
+            friendId:req.friend.friendId
         },
         include:{
-            data:{
-                id:req.user.id
+            friend:{
+                select:{
+                    name:true
+                }
             }
         }
+        
     });
 
 }
