@@ -15,8 +15,9 @@ const {
 
 router.get("/friend_list", isLoggedIn, getFriends); //gets friend list
 router.delete("/friend_list/remove/:friendId", isLoggedIn, removeFriend); //removes a friend id from table
-router.post("/addFriend", isLoggedIn, getFriends); //adds a person to the friends list
-//add route for getting single friend details
+router.post("/addFriend", isLoggedIn, getFriends); 
+router.get("/friend_list/:friendId", isLoggedIn, viewFriendProfile);
+router.get("/friend_list/:friendId/posts", isLoggedIn, viewFriendPosts);
 
 //function for getting friends list
 async function getFriends(req, res) {
@@ -107,6 +108,50 @@ async function addFriend(req, res) {
         }
         
     });
+    //function to fetch profile of a friend of a user
+async function viewFriendProfile(req,res){
+    try{
+        const friendProfile = await prisma.user.findOne({
+            where:{
+                id:req.friend.friendId
+            },
+            select:{
+                name:true,
+                email:true,
+                profilePicture:true,
+                bio:true,
+                location:true,
+                website:true,
+                dateOfBirth:true
+            }
+        });
+        res.json({friendProfile});
+    }
+    catch(error){
+        res.json({
+            error:error.message
+        });
+    }
+}
+
+async function viewFriendPosts(req,res){
+    try{
+        const friendPosts = await prisma.post.findMany({
+            where:{
+                userId:req.friend.friendId
+            },
+            orderBy:{
+                createdAt:"desc"
+            }
+        });
+        res.json({friendPosts});
+    }
+    catch(error){
+        res.json({
+            error:error.message
+        });
+    }
+}
 
 }
 module.exports = router;
