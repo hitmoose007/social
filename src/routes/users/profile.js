@@ -13,7 +13,7 @@ router.get("/posts", isLoggedIn, getPosts);
 router.get("/comments", isLoggedIn, getComments);
 
 
-
+//it says findOne is not a function and gives error
 async function getUser(req, res) {
   try {
     const user = await prisma.user.findOne({
@@ -49,6 +49,7 @@ async function updateUser(req, res) {
   }
 }
 
+/* "error": "\nInvalid `prisma.post.findMany()` invocation in\nC:\\Users\\Ali Abdullah\\OneDrive\\Desktop\\Vs code\\Social\\social\\src\\routes\\users\\profile.js:55:37\n\n   52 async function getPosts(req,res){\n   53   //function to get user's posts\n   54   try {\n→  55     const posts = await prisma.post.findMany({\n            where: {\n              userId: 'ckz9lnlsj000034uidpelrzlf'\n              ~~~~~~\n            },\n            orderBy: {\n              createdAt: 'desc'\n            }\n          })\n\nUnknown arg `userId` in where.userId for type PostWhereInput. Did you mean `authorId`? Available args:\ntype PostWhereInput {\n  AND?: PostWhereInput | List<PostWhereInput>\n  OR?: List<PostWhereInput>\n  NOT?: PostWhereInput | List<PostWhereInput>\n  id?: StringFilter | String\n  title?: StringFilter | String\n  content?: StringFilter | String\n  author?: UserRelationFilter | UserWhereInput\n  authorId?: StringFilter | String\n  createdAt?: DateTimeFilter | DateTime\n  updatedAt?: DateTimeFilter | DateTime\n  comments?: PostCommentListRelationFilter\n  likes?: PostLikeListRelationFilter\n  dislike?: PostDislikeListRelationFilter\n  share?: PostShareListRelationFilter\n}\n\n"*/
 async function getPosts(req,res){
   //function to get user's posts
   try {

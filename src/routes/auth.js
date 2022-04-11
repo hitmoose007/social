@@ -12,6 +12,7 @@ router.post("/login", login);
 // router.post('/reset-password', resetPassword);
 
 async function login(req, res) {
+  console.log(req.body)
   const { value, error } = loginValidator(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
