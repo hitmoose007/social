@@ -70,6 +70,7 @@ async function registerUser(req, res) {
 
 async function updateUser(req, res) {
   try {
+    console.log(req.body);
     const { value, error } = userUpdateValidator(req.body);
     if (error) {
       res.status(400).json({
@@ -132,6 +133,7 @@ async function updateUser(req, res) {
       });
     }
   } catch (error) {
+    console.log(error)
     res.json({
       error: error.message,
     });

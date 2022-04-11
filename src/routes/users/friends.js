@@ -14,8 +14,8 @@ const {
 
 
 router.get("/friend_list", isLoggedIn, getFriends); //gets friend list
-router.delete("/friend_list/remove/:friendId", isLoggedIn, removeFriend); //removes a friend id from table
-router.post("/addFriend", isLoggedIn, getFriends); 
+router.delete("/friend_list/:friendId/remove", isLoggedIn, removeFriend); //removes a friend id from table
+router.post("/:id/addFriend", isLoggedIn, addFriend); 
 router.get("/friend_list/:friendId", isLoggedIn, viewFriendProfile);
 router.get("/friend_list/:friendId/posts", isLoggedIn, viewFriendPosts);
 
@@ -45,71 +45,44 @@ async function getFriends(req, res) {
 
 //function for removing a friend
 async function removeFriend(req, res) {
-    const friends = await prisma.friend.findFirst({
-        where: {
-            userId: req.user.id,
-            friendId: req.friend.friendId
-        }
-    });
-    if (friends != null) {
-        try {
-            const deleteFriend = await prisma.friend.delete({
-                where: {
-                    friendId: req.param.friendId
+        //function to remove a friend
+    try {
+        const friend = await prisma.friend.delete({
+            where: {
+                userId_friendId: {
+                    userId: req.user.id,
+                    friendId: req.params.friendId
                 }
-            });
-            res.json({
-                deleteFriend,
-            });
-        } catch (error) {
-            res.json({
-                error: error.message
-            });
-        }
-    } else {
-        return res.status(400).json({
-            error: "No friend with that ID exists"
+            }
         });
+        res.json(friend);
+    } catch (error) {
+        console.log(error);
+        res.json({
+            error: error.message,
+        });
+
     }
 }
 
-async function addFriend(req, res) {
-    try {
-        const user = await prisma.user.findFirst({//check if the user being added exists
-            where: {
-                id:req.user.id
+async function addFriend(req,res){
+    try{
+        const friend = await prisma.friend.create({
+            data:{
+                userId: req.user.id,
+                friendId: req.params.id
             }
         });
+        res.json(friend);
+    }catch(error){
+        res.json({
+            error: error.message
+        });
     }
-    catch(error){
-        if(user==null){
-        const errorM= "Cannot find user";
-        res.json({errorM});
-        }
-        else
-        {
-            res.json({
-                error:error.message
-            });
-        }
-        return;
-    }
-    const addUser = await prisma.friend.create({// function for adding friend
-        data:{
-            userId:req.user.id,
-            friendId:req.friend.friendId
-        },
-        include:{
-            friend:{
-                select:{
-                    name:true
-                }
-            }
-        }
-        
-    });
 }
-    //function to fetch profile of a friend of a user
+    
+
+//function to fetch profile of a friend of a user
 async function viewFriendProfile(req,res){
     try{
         const friendProfile = await prisma.user.findOne({
