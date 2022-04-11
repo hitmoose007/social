@@ -108,6 +108,7 @@ async function addFriend(req, res) {
         }
         
     });
+}
     //function to fetch profile of a friend of a user
 async function viewFriendProfile(req,res){
     try{
@@ -153,5 +154,4 @@ async function viewFriendPosts(req,res){
     }
 }
 
-}
 module.exports = router;
