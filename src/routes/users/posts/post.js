@@ -9,9 +9,9 @@ const prisma = new PrismaClient();
 const {
     isLoggedIn,
     isAdmin
-} = require("../../middleware/auth");
+} = require("../../../middleware/auth");
 
-const{postSchema,postUpdateSchema,postDeleteSchema} = require("../../validation/posts");
+const{postSchema,postUpdateSchema,postDeleteSchema} = require("../../../validation/posts");
 
 //router to create a post
 router.post("/", isLoggedIn, createPost);
@@ -34,14 +34,18 @@ router.get("/:postId", isLoggedIn, getPost);
 
 async function createPost(req, res) {
 
-    
+    // const {value , error} = postSchema.validate(req.body);
+    // if(error) return res.status(400).json({
+    //     error: error.message,
+    // });
+
     try {
         const newPost = await prisma.post.create({
             data: {
                 userId: req.user.id,
                 user:req.user.name,
                 content: req.body.content,
-                image: req.body.image,
+                
                 likes: 0,
                 comments: 0,
                 createdAt: new Date().toISOString(),
@@ -55,6 +59,7 @@ async function createPost(req, res) {
     }
 }
 async function getFriendPosts(req, res) {
+    
     //function to get friend's posts
     try {
         const posts = await prisma.post.findMany({

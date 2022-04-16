@@ -11,4 +11,4 @@ const commentUpdateSchema = joi.object({
 
 
 
-export { commentsSchema, commentUpdateSchema };
+module.exports = { commentsSchema, commentUpdateSchema };

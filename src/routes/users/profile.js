@@ -16,7 +16,7 @@ router.get("/comments", isLoggedIn, getComments);
 //it says findOne is not a function and gives error
 async function getUser(req, res) {
   try {
-    const user = await prisma.user.findOne({
+    const user = await prisma.user.findFirst({
       where: {
         email: req.user.email,
       },
@@ -88,4 +88,4 @@ async function getComments(req,res){
   }
 }
 
-module.exports=router;
+module.exports = router;

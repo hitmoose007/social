@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 const {
     isLoggedIn,
     isAdmin
-} = require("../../middleware/auth");
+} = require("../../../../middleware/auth");
 
 //router for creating a comment under a post
 router.post("/:postId/comments/create", isLoggedIn, createComment);
