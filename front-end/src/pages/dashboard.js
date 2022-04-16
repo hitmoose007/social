@@ -11,15 +11,7 @@ function Dashboard() {
     return <Posts id={item.id} {...item} />;
   });
   return (
-    <div>
-      <Profile
-        img={profiledata.img}
-        name={profiledata.name}
-        bio={profiledata.bio}
-        followers={profiledata.followers}
-        following={profiledata.following}
-      />
-      <hr></hr>
+    <div className="dashboard">
       <div className="postList">{posts}</div>
     </div>
   );
