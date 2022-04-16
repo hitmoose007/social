@@ -13,6 +13,7 @@ export default function Posts(props) {
       name="moosah"
       img="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
     />
+    <hr></hr>
         <p>{props.caption}</p>
       <img src={props.img} alt="pic"/>
       <p className="like"><FcLike/> {props.likes}</p>
