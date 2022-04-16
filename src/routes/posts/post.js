@@ -11,6 +11,8 @@ const {
     isAdmin
 } = require("../../middleware/auth");
 
+
+
 //router to create a post
 router.post("/", isLoggedIn, createPost);
 //router to get posts of friends
