@@ -10,6 +10,10 @@ const {
     isLoggedIn,
     isAdmin
 } = require("../../middleware/auth");
+const{
+    commentValidator,
+    commentUpdateValidator
+}=require("../../validation/index");
 
 //router for creating a comment under a post
 router.post("/:postId/comments/create", isLoggedIn, createComment);
