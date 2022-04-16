@@ -10,17 +10,23 @@ function Dashboard() {
   const posts = data.map((item) => {
     return <Posts id={item.id} {...item} />;
   });
+  function handleSubmit(){
+    console.log("posted")
+  }
   return (
-    <div>
+    <div className="dashboard">
+      <div className="postList">
+      <div className="posts">
       <Profile
-        img={profiledata.img}
-        name={profiledata.name}
-        bio={profiledata.bio}
-        followers={profiledata.followers}
-        following={profiledata.following}
+      name="moosah"
+      img={profiledata.img}
       />
-      <hr></hr>
-      <div className="postList">{posts}</div>
+      <form>
+          <input type="text" placeholder="Whats on your mind?" />
+          <input className="submit" type="submit" value="post" onClick={handleSubmit}/>
+        </form>
+      </div>
+        {posts}</div>
     </div>
   );
 }

@@ -145,95 +145,63 @@ background: linear-gradient(180deg, rgba(18,20,50,1) 14%, rgba(35,62,93,1) 100%)
 
 }
 .posts{
-  width: 20rem;
+  width: 50%;
   font-size: 15px;
   flex: 0 0 auto;       
   display: flex;       
   flex-direction: column;
   position: relative;
-  margin-top: 15%;
+  padding: 5%;
+  border-radius: 0.5rem;
+  background-color: #10354b;
+}
+.dashboard{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
 }
 
 .postList{
   display:flex;
+  flex-direction: column;
   gap: 20px;
-  overflow-x: auto;
+  overflow-y: scroll;
   width:60%;
   margin-left: 20%;
 }
-.profile{
+ .profile{
   display: flex;
-  justify-content: center;
-  padding:10px;
+  gap:10px;
+  font-weight: bolder;
+  margin-bottom: 1%;
 }
-.profiledetails{
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-}
-.profiledetails img{
+.profile img{
+  width:50px;
+  height:50px;
   border-radius: 50%;
-  width: 200px;
-  height: 200px;
 }
-.profilefollowing{
- display: flex;
- height: 20%;
- gap:10px;
+.posts hr{
+  width: 100%;
 }
-hr{
-  background-color: rgb(209, 164, 164);
-  border: none;
-  height: 1px;
-  margin: 0 20%;
+.like:hover{
+  cursor: pointer;
 }
-.profilefollowing button{
-  pointer-events: auto;
-	cursor: pointer;
-  background: rgba(18,28,50,1);
-  border: none;
-	padding: 1.5rem 3rem;
-	position: relative;
-	display: flex;
-  transition: all 0.5s ease;
-  flex-direction: column;
+.posts input{
+  border:none;
+  padding:10px;
+  background-color: #0c2839;
   color: white;
+  border-radius: 2.5rem;
+  margin:1%;
 }
-.profilefollowing button:hover{
-  background: rgb(39, 35, 93);
+.posts input:focus{
+  outline: none;
 }
-@media screen and (max-width: 1000px) {
-  .profile{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding:10px;
-  }
-  .postList{
-    display:flex;
-    gap: 20px;
-    overflow-x: auto;
-    width:90%;
-    margin-left: 5%;
-  }
 
-}
 ::-webkit-scrollbar {
-  width: 20px;
+  display: none;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-background-color:none;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  border: #fff solid 1px;
-  border-radius: 10px;
-}
 
 
   
