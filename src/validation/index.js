@@ -1,7 +1,7 @@
 const { userRegisterationSchema, userUpdateSchema, userDeleteSchema, } = require("./users");
 const loginSchema = require("./auth");
 const { postSchema, postUpdateSchema, postDeleteSchema, } = require("./posts");
-const { commentSchema, commentUpdateSchema, } = require("./comments");
+const { commentsCreateSchema, commentUpdateSchema, } = require("./comments");
 
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
   loginValidator: (data) => loginSchema.validate(data),
   postValidator: (data) => postSchema.validate(data),
   postUpdateValidator: (data) => postUpdateSchema.validate(data),
-  commentValidator:(data)=> commentSchema.validate(data),
+  commentValidator:(data)=> commentsCreateSchema.validate(data),
   commentUpdateValidator:(data)=> commentUpdateSchema.validate(data),
 };
     

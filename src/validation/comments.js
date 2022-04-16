@@ -1,7 +1,6 @@
 const joi = require("joi");
 
-const commentsSchema = joi.object({
-    userId: joi.string().required(),
+const commentsCreateSchema = joi.object({
     content: joi.string().required(),
 }); 
 
@@ -11,4 +10,4 @@ const commentUpdateSchema = joi.object({
 
 
 
-module.exports = { commentsSchema, commentUpdateSchema };
+module.exports = { commentsCreateSchema, commentUpdateSchema };
