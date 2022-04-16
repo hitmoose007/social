@@ -12,7 +12,7 @@ router.post("/login", login);
 // router.post('/reset-password', resetPassword);
 
 async function login(req, res) {
-  console.log(req.body)
+  
   const { value, error } = loginValidator(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
@@ -25,22 +25,27 @@ async function login(req, res) {
   if (!user) return res.status(400).json({ error: "User not found" });
 
   const isMatch = await comparePassword(value.password, user.password);
-  
+
   if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-  jwt.sign({ email: value.email}, "privateKey", {
+  jwt.sign(
+    { email: value.email },
+    "privateKey",
+    {
       expiresIn: "2h",
-  },function (err, token) {
-    //print out error if there is one
-    if (err) {
-      console.log(err);
+    },
+    function (err, token) {
+      //print out error if there is one
+      if (err) {
+        console.log(err);
+      }
+      //return the token
+      console.log(token);
+      res.json({
+        token,
+      });
     }
-    //return the token
-    console.log(token)
-    res.json({
-      token,
-    });
-  });
+  );
 }
 
 module.exports = router;

@@ -12,25 +12,27 @@ const {
 } = require("../../middleware/auth");
 
 //router to create a post
-router.post("/create", isLoggedIn, createPost);
+router.post("/", isLoggedIn, createPost);
 //router to get posts of friends
-router.get("/posts", isLoggedIn, getFriendPosts);
+router.get("/", isLoggedIn, getFriendPosts);
 //router to get comments of on a post
-router.get("/comments", isLoggedIn, getComments);
+router.get("/:postId/comments", isLoggedIn, getComments);
 //router to like a post
-router.post("/like", isLoggedIn, likePost);
+router.post("/:postId/like", isLoggedIn, likePost);
 //router to unlike a post
-router.post("/unlike", isLoggedIn, unlikePost);
+router.post("/:postId/unlike", isLoggedIn, unlikePost);
 //router to delete a post of logged in user
 
-router.delete("/delete/:postId", isLoggedIn, deletePost);
+router.delete("/:postId", isLoggedIn, deletePost);
 //router to edit a post
-router.put("/edit/:postId", isLoggedIn, editPost);
+router.put("/:postId", isLoggedIn, editPost);
 //router to get a post
 router.get("/:postId", isLoggedIn, getPost);
 
 
 async function createPost(req, res) {
+
+    
     try {
         const newPost = await prisma.post.create({
             data: {
