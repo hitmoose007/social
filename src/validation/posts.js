@@ -14,3 +14,5 @@ const postUpdateSchema = joi.object({
     content: joi.string(),
     
 });
+
+export { postSchema, postUpdateSchema };
