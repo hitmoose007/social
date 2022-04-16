@@ -133,3 +133,6 @@ prisma\.env
 prisma/.env
 .env
 .env
+prisma/.env
+prisma/migrations/migration_lock.toml
+prisma/.env
