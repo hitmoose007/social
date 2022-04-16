@@ -11,6 +11,7 @@ const {
     isAdmin
 } = require("../../middleware/auth");
 
+const{postSchema,postUpdateSchema,postDeleteSchema} = require("../../validation/posts");
 
 //router to create a post
 router.post("/", isLoggedIn, createPost);
