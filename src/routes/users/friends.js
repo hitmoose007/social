@@ -45,7 +45,6 @@ async function getFriends(req, res) {
 
 //function for removing a friend
 async function removeFriend(req, res) {
-        //function to remove a friend
     try {
         const friend = await prisma.friend.delete({
             where: {

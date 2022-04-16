@@ -1,11 +1,11 @@
 const joi = require("joi");
 
 const commentsCreateSchema = joi.object({
-    content: joi.string().required(),
+    content: joi.string().required().max(350),
 }); 
 
 const commentUpdateSchema = joi.object({
-    content: joi.string(),
+    content: joi.string().max(350),
 });
 
 

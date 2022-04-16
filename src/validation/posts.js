@@ -3,7 +3,7 @@ const joi = require("joi");
 const postSchema = joi.object({
 
     title: joi.string().required(),
-    content: joi.string().required(),
+    content: joi.string().required().max(500),
 
 
 }); 
@@ -11,7 +11,7 @@ const postSchema = joi.object({
 const postUpdateSchema = joi.object({
   
     title: joi.string(),
-    content: joi.string(),
+    content: joi.string().max(500),
     
 });
 
