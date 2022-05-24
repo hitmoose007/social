@@ -13,6 +13,7 @@ import Header from "./components/header";
 import Chats from "./pages/chats";
 import Landing from "./pages/landing";
 import Fyp from "./pages/fyp";
+import Footer from "./components/footer";
 
 function App() {
   let isValidSession = false;
@@ -52,6 +53,7 @@ function App() {
         component={Chats}
         isAuth={isValidSession}
       />
+    {isValidSession&& <Footer/>}
     </Router>
   );
 }

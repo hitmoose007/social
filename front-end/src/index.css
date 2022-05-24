@@ -119,12 +119,12 @@ background: rgb(18,20,50);
 }
 .posts{
   width: 60%;
-  font-size: 15px;
+  font-size: 12px;
   flex: 0 0 auto;       
   display: flex;       
   flex-direction: column;
   position: relative;
-  padding: 5%;
+  padding: 2%;
   background: rgba(77, 76, 76, 0.6);
 }
 .chattingPage{
@@ -396,10 +396,61 @@ background: rgb(18,20,50);
 ::-webkit-scrollbar {
   display: none;
 }
+#inputTag{
+  display: none;
+}
+#label{
+  cursor: pointer;
+  font-size: 25px;
+}
+.fypCont{
+  width: 80%;
+ display: grid;
+ grid-template-columns: auto auto auto;
+ background: rgba(77, 76, 76, 0.6);
 
-
-
-  
+}
+.gridItem{
+  width:100%;
+transition: 0.5s;
+}
+.gridItem:hover{
+  background-color: transparent;
+  transform: rotate(3deg);
+}
+.gridItem img{
+  width: 400px;
+  cursor: pointer;
+}
+.fyp{
+  display: flex;
+  justify-content: center;
+}
+h2{
+  text-align: center;
+}
+.footer{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: #141628;
+  color: white;
+  padding: 1%;
+  font-size: 20px;
+  font-weight: bolder;
+}
+#ul{
+  list-style: none;
+margin: 0;  
+padding: 0;
+display: inline-flex;
+}
+#ul li{
+  margin:10px;
+}
+.copyright{
+  text-align: center;
+}
 
 
 
