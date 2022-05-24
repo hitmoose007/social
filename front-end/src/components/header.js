@@ -9,9 +9,11 @@ export default function Header(props){
     return(
         <div className="header">
            <Link to="/dashboard"><div className="logo"><SiGnusocial/></div></Link>
+           <input id="search" type="text" placeholder="Search" name="searchbar"></input>
             <div className="links">
             {props.show && <Link to="/chats"><button className="lgOutbtn"><SiRocketdotchat/></button></Link>}
             {props.show&&<button className="lgOutbtn" onClick={()=>{
+                alert("Logging out");
                 authService.Logout();
             }}>Logout</button> }
             </div>

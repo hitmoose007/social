@@ -25,8 +25,8 @@ export default function Register() {
         window.location.href = "/";
       else(alert("Email already exists/invalid email or username"))
       })
-      .catch((data) => {
-        console.log(data);
+      .catch((error) => {
+        alert("Email already exists/invalid email or username: "+error);
       });
   }
   return (

@@ -27,6 +27,8 @@ export default function Login() {
     const { data } = await axios.post("http://localhost:5000/api/auth/login", {
       email: formData.email,
       password: formData.password,
+    }).catch(error=>{
+      alert('Invalid Credentials');
     })
 
       if (data.token) {

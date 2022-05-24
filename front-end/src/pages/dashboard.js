@@ -6,10 +6,22 @@ import data from "../data";
 import profiledata from "../profiledata";
 
 function Dashboard() {
+  const [formData,setFormData]=React.useState({
+    content:"",
+  })
   console.log(profiledata.img);
   const posts = data.map((item) => {
     return <Posts id={item.id} {...item} />;
   });
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
+  }
   function handleSubmit(){
     console.log("posted")
   }
@@ -22,7 +34,8 @@ function Dashboard() {
       img={profiledata.img}
       />
       <form>
-          <input type="text" placeholder="Whats on your mind?" />
+          <input type="text" placeholder="Title of your post" name="content" onChange={handleChange} value={formData.title}></input>
+          <input type="text" placeholder="Whats on your mind?" name="content" onChange={handleChange} value={formData.content} />
           <input className="submit" type="submit" value="post" onClick={handleSubmit}/>
         </form>
       </div>
