@@ -1,6 +1,7 @@
 import React from "react";
 import profiledata from "../profiledata";
 import Profile from "../components/profile";
+import Header from "../components/header";
 
 export default function Chats() {
   const [formData, setFormData] = React.useState({
@@ -19,6 +20,9 @@ export default function Chats() {
     console.log("posted");
   }
   return (
+    <>
+    <Header show="chats" />
+
     <div className="chattingPage">
       <div className="chats">
           <div className="chatHeader">
@@ -54,5 +58,6 @@ export default function Chats() {
           </div>
       </div>
     </div>
+  </>
   );
 }

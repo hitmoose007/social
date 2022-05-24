@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [formData, setFormData] = React.useState({
@@ -31,8 +32,8 @@ export default function Register() {
   }
   return (
     <div className="container">
-
       <div className="form">
+      <h2>Create Your Account</h2>
         <form>
           {/* <input
             type="text"
@@ -63,6 +64,11 @@ export default function Register() {
             value="Register"
             onClick={handleSubmit}
           />
+        <Link to="/login">
+          <button className="regBtn">
+            <span>Login</span>
+          </button>
+        </Link>
         </form>
       </div>
     </div>

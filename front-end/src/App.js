@@ -11,6 +11,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import LoginRoute from "./components/LoginRoute";
 import Header from "./components/header";
 import Chats from "./pages/chats";
+import Landing from "./pages/landing";
+import Fyp from "./pages/fyp";
 
 function App() {
   let isValidSession = false;
@@ -29,13 +31,19 @@ function App() {
 
   return (
     <Router>
-     {isValidSession && <Header show={isValidSession} />}
-      <LoginRoute path="/" exact component={Login} isAuth={isValidSession} />
+      <LoginRoute path="/" exact component={Landing} isAuth={isValidSession} />
+      <LoginRoute path="/login" exact component={Login} isAuth={isValidSession} />
       <LoginRoute path="/register" exact component={Register} isAuth={isValidSession} />
       <ProtectedRoute
         path="/dashboard"
         exact
         component={Dashboard}
+        isAuth={isValidSession}
+      />
+      <ProtectedRoute
+        path="/fyp"
+        exact
+        component={Fyp}
         isAuth={isValidSession}
       />
       <ProtectedRoute

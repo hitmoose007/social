@@ -61,13 +61,12 @@ export default function Login() {
             value={formData.password}
           />
           <input className="submit" type="submit" value="Login" onClick={handleSubmit}/>
-        </form>
-      <div className="reg">
         <Link to="/register">
-        <a>Register</a>
-              <FaCashRegister />
-          </Link>
-        </div>
+          <button className="regBtn">
+            <span>Register</span>
+          </button>
+        </Link>
+        </form>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import Posts from "../components/posts";
 import Profile from "../components/profile";
 import data from "../data";
 import profiledata from "../profiledata";
-
+import Header from "../components/header";
 function Dashboard() {
   const [formData,setFormData]=React.useState({
     content:"",
@@ -26,6 +26,8 @@ function Dashboard() {
     console.log("posted")
   }
   return (
+    <>
+    <Header show="dashboard" />
     <div className="dashboard">
       <div className="postList">
       <div className="posts">
@@ -33,6 +35,7 @@ function Dashboard() {
       name="moosah"
       img={profiledata.img}
       />
+      <hr></hr>
       <form>
           <input type="text" placeholder="Title of your post" name="content" onChange={handleChange} value={formData.title}></input>
           <input type="text" placeholder="Whats on your mind?" name="content" onChange={handleChange} value={formData.content} />
@@ -41,6 +44,7 @@ function Dashboard() {
       </div>
         {posts}</div>
     </div>
+      </>
   );
 }
 

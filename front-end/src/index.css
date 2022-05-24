@@ -18,7 +18,6 @@ code {
   display: flex;
   justify-content: flex-start;
 background: rgb(18,20,50);
-background: linear-gradient(180deg, rgba(18,20,50,1) 14%, rgba(35,62,93,1) 100%);
    left:0;
   top:0;
   padding: 10px;
@@ -91,33 +90,7 @@ background: linear-gradient(180deg, rgba(18,20,50,1) 14%, rgba(35,62,93,1) 100%)
   background-color: rgb(199, 202, 207);
   color:black;
   cursor: pointer;}
-.reg{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    width:80px;
-    height: 80px;
-    flex-wrap: wrap;
-    background-color: rgba(2,0,36,1);
-    border-radius: 100%;
-    box-shadow: 0px 10px 14px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
-    transition: all 0.5s ease;
-  }
-  .reg a{
-    font-size: 15px;
-    text-decoration: none;
-    color:white;
-    padding:20px;
-}
-.reg a:hover{
-  color: rgb(0, 0, 0);
-}
-.reg:hover{
-  background: rgb(159, 146, 180);
-  color:black;
-  cursor: pointer;
-}
+
 
 .lgOutbtn {background-image: linear-gradient(to right, #314755 0%, #132769  51%, #314755  100%)}
 .lgOutbtn {
@@ -145,15 +118,14 @@ background: linear-gradient(180deg, rgba(18,20,50,1) 14%, rgba(35,62,93,1) 100%)
 
 }
 .posts{
-  width: 50%;
+  width: 60%;
   font-size: 15px;
   flex: 0 0 auto;       
   display: flex;       
   flex-direction: column;
   position: relative;
   padding: 5%;
-  border-radius: 0.5rem;
-  background-color: #10354b;
+  background: rgba(77, 76, 76, 0.6);
 }
 .chattingPage{
   font-size: 15px;
@@ -182,9 +154,121 @@ background: linear-gradient(180deg, rgba(18,20,50,1) 14%, rgba(35,62,93,1) 100%)
   border-radius: 2.5rem;
   transition: 0.5s;
 }
-#search{
-  display:flex;
+.landing{
+  width:100%;
+  height: 100vh;
+  background-image: url("https://img.freepik.com/free-vector/abstract-dark-blue-background-with-overlapping-stripe_500223-232.jpg");
+  background-size: cover;
+}
+
+.regBtn {
+  color: #FFF;
+  transition: all 0.5s;
+  position: relative;
+  border-radius: 2.5rem;
+  background-color: transparent;
   border:none;
+  padding:5%;
+  margin:10%;
+}
+.regBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 2.5rem;
+
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+.regBtn:hover::before {
+  opacity: 0 ;
+  transform: scale(0.5,0.5);
+  cursor: pointer;
+  border-radius: 2.5rem;
+
+}
+.regBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border: 1px solid rgba(255,255,255,0.5);
+  transform: scale(1.2,1.2);
+  cursor: pointer;
+  border-radius: 2.5rem;
+
+
+}
+.regBtn:hover::after {
+  opacity: 1;
+  transform: scale(1,1);
+  cursor: pointer;
+  border-radius: 2.5rem;
+}
+.landBtn {
+  color: #FFF;
+  transition: all 0.5s;
+  position: relative;
+  background-color: transparent;
+  border:none;
+  padding:1%;
+  margin:1%;
+}
+.landBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+.landBtn:hover::before {
+  opacity: 0 ;
+  transform: scale(0.5,0.5);
+  cursor: pointer;
+}
+.landBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border: 1px solid rgba(255,255,255,0.5);
+  transform: scale(1.2,1.2);
+  cursor: pointer;
+
+}
+.landBtn:hover::after {
+  opacity: 1;
+  transform: scale(1,1);
+  cursor: pointer;
+}
+.landingContent{
+  background: rgba(77, 76, 76, 0.6);
+  padding:5%;
+  margin-top:10%;
+  margin-left: auto;
+  border:none;
+}
+#search{
+  border:none;
+  align-self:center;
   padding:1%;
   width: 40%;
   background-color: #223642;
